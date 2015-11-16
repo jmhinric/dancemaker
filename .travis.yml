@@ -10,3 +10,6 @@ services:
 # version is "9.1" by default.  "9.3" is the latest available with travis
 addons:
   postgresql: "9.3"
+
+before_script:
+  - cp config/database.yml.travis config/database.yml
