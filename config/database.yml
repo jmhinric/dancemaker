@@ -5,12 +5,12 @@ default: &default
 
 development:
   <<: *default
-  database: db/dancemaker_development
+  database: dancemaker_development
 
 production:
   <<: *default
-  database: db/dancemaker_production
+  database: dancemaker_production
 
 test: &test
   <<: *default
-  database: db/dancemaker_test
+  database: dancemaker_test
