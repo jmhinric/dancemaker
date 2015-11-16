@@ -3,3 +3,10 @@ rvm:
  - "2.2.3"
 # uncomment this line if your project needs to run something other than `rake`:
 # script: bundle exec rspec spec
+
+services:
+  - postgresql
+
+# version is "9.1" by default.  "9.3" is the latest available with travis
+addons:
+  postgresql: "9.3"
