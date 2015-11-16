@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: dancemaker_development
+
+production:
+  <<: *default
+  database: dancemaker_production
+
+test: &test
+  <<: *default
+  database: dancemaker_test
