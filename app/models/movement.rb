@@ -4,6 +4,8 @@ class Movement
 
   validates :name, :weight, presence: true
 
-  # @attribute name [String]
-  # @attribute weight [Integer]
+  # @attribute name
+  #   @return [String]
+  # @attribute weight
+  #   @return [Integer]
 end

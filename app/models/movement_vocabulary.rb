@@ -10,9 +10,12 @@ class MovementVocabulary
     "three times"
   ]
 
-  # @attribute name [String]
-  # @attribute movements [Array<Movement>]
-  # @attribute qualities [Array<String>]
+  # @attribute name
+  #   @return [String]
+  # @attribute movements
+  #   @return [Array<Movement>]
+  # @attribute qualities
+  #   @return [Array<String>]
 
   def initialize(**args)
     super

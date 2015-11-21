@@ -5,10 +5,14 @@ class Phrase
   DEFAULT_NUM_MEASURES = 4
   DEFAULT_BEATS_PER_MEASURE = 8
 
-  # @attribute name [String]
-  # @attribute movement_vocabulary [MovementVocabulary]
-  # @attribute num_measures [Integer]
-  # @attribute beats_per_measure [Integer]
+  # @attribute name
+  #   @return [String]
+  # @attribute movement_vocabulary
+  #   @return [MovementVocabulary]
+  # @attribute num_measures
+  #   @return [Integer]
+  # @attribute beats_per_measure
+  #   @return [Integer]
 
   def initialize(**args)
     super
