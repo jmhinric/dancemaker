@@ -1,6 +1,10 @@
 require "rails_helper"
 
 RSpec.describe Movement do
+  it { should validate_presence_of :name }
+  it { should validate_presence_of :weight }
+
+
   let(:name) { Faker::Name.name }
   let(:weight) { Faker::Number.number(2) }
   let(:movement) { described_class.new(name: name, weight: weight) }
