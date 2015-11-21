@@ -1,22 +1,14 @@
 <h1>DanceMaker</h1>
 <ul>
-  <h3>Funny Dance</h3>
-  <% @funny.each_with_index do |phrase, index| %>
-    <div><%="#{index + 1}:"%></div>
-    <ul>
-      <% phrase.each_with_index do |move, index | %>
-        <li><%="#{index + 1}: #{move}"%></li>
-      <% end %>
-    </ul>
-  <% end %>
-
-  <h3>Beautiful Dance</h3>
-  <% @beautiful.each_with_index do |phrase, index| %>
-    <div><%="#{index + 1}:"%></div>
-    <ul>
-      <% phrase.each_with_index do |move, index | %>
-        <li><%="#{index + 1}: #{move}"%></li>
-      <% end %>
-    </ul>
+  <% @phrases.each do |phrase| %>
+    <h3><%=phrase.name%></h3>
+    <% phrase.measures.each_with_index do |measure, index| %>
+      <div><%="#{index + 1}:"%></div>
+      <ul>
+        <% measure.each_with_index do |beat, index | %>
+          <li><%="#{index + 1}: #{beat}"%></li>
+        <% end %>
+      </ul>
+    <% end %>
   <% end %>
 </ul>

@@ -1,50 +1,77 @@
 class MakerController < ApplicationController
   def index
-    @funny = Maker.new(funny_dance_attrs).phrases
-    @beautiful = Maker.new(beautiful_dance_attrs).phrases
+    @phrases = [beautiful_phrase, funny_phrase]
   end
 
-  def beautiful_dance_attrs
-    {
-      moves: [
-        { name: "arch", weight: 20 },
-        { name: "lunge", weight: 20 },
-        { name: "developpe", weight: 40 },
-        { name: "pirouette", weight: 20 }
-      ],
+  def beautiful_phrase
+    Phrase.new(
+      name: "Beautiful Phrase",
+      movement_vocabulary: beautiful_movement_vocab,
+      num_measures: 8,
+      beats_per_measure: 3
+    )
+  end
 
+  def beautiful_movement_vocab
+    MovementVocabulary.new(
+      name: "beautiful",
+      movements: beautiful_movements,
       qualities: [
         "gently",
         "slowly",
         "softly"
-      ],
-
-      duration: 6
-    }
+      ]
+    )
   end
 
-  def funny_dance_attrs
-    {
-      moves: [
-        { name: "smile",            weight: 15 },
-        { name: "jump",             weight: 15 },
-        { name: "shake",            weight: 15 },
-        { name: "kick",             weight: 15 },
-        { name: "stick out tongue", weight: 5 },
-        { name: "turn head",        weight: 5 },
-        { name: "give attitude",    weight: 12 },
-        { name: "gesture",          weight: 18 }
-      ],
+  def beautiful_movements
+    movements = []
+    [
+      { name: "arch",      weight: 20 },
+      { name: "lunge",     weight: 20 },
+      { name: "developpe", weight: 40 },
+      { name: "pirouette", weight: 20 }
+    ].each { |attrs| movements << Movement.new(attrs) }
 
+    movements
+  end
+
+  def funny_phrase
+    Phrase.new(
+      name: "Funny Phrase",
+      movement_vocabulary: funny_movement_vocab,
+      num_measures: 7,
+      beats_per_measure: 5
+    )
+  end
+
+  def funny_movement_vocab
+    MovementVocabulary.new(
+      name: "funny",
+      movements: funny_movements,
       qualities: [
         "lovingly",
         "nervously",
         "slowly",
         "frantically",
         "numbly"
-      ],
+      ]
+    )
+  end
 
-      duration: 2
-    }
+  def funny_movements
+    movements = []
+    [
+      { name: "smile",            weight: 15 },
+      { name: "jump",             weight: 15 },
+      { name: "shake",            weight: 15 },
+      { name: "kick",             weight: 15 },
+      { name: "stick out tongue", weight: 5  },
+      { name: "turn head",        weight: 5  },
+      { name: "give attitude",    weight: 12 },
+      { name: "gesture",          weight: 18 }
+    ].each { |attrs| movements << Movement.new(attrs) }
+
+    movements
   end
 end
