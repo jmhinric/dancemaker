@@ -2,13 +2,14 @@
 <ul>
   <% @phrases.each do |phrase| %>
     <h3><%=phrase.name%></h3>
-    <% phrase.measures.each_with_index do |measure, index| %>
-      <div><%="#{index + 1}:"%></div>
-      <ul>
-        <% measure.each_with_index do |beat, index | %>
-          <li><%="#{index + 1}: #{beat}"%></li>
-        <% end %>
-      </ul>
+    <% phrase.measures.each do |measure| %>
+        <div class="measure">
+          <% measure.beats.each_with_index do |beat, b_index| %>
+            <% beat.movements.each_with_index do |movement, c_index| %>
+              <li><%="#{beat.label(c_index+1, measure.number)}: #{movement}"%></li>
+            <% end %>
+          <% end %>
+        </div>
     <% end %>
   <% end %>
 </ul>

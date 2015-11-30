@@ -1,6 +1,6 @@
 class Phrase
   include ActiveModel::Model
-  attr_accessor :name, :movement_vocabulary, :num_measures, :beats_per_measure, :measures
+  attr_accessor :name, :movement_vocabulary, :num_measures, :beats_per_measure, :counts_per_beat, :measures
 
   DEFAULT_NUM_MEASURES = 4
   DEFAULT_BEATS_PER_MEASURE = 8
@@ -13,23 +13,30 @@ class Phrase
   #   @return [Integer]
   # @attribute beats_per_measure
   #   @return [Integer]
+  # @attribute counts_per_beat
+  #   @return [Integer]
 
   def initialize(**args)
     super
-    @measures = []
+    self.num_measures ||= DEFAULT_NUM_MEASURES
+    self.beats_per_measure ||= DEFAULT_BEATS_PER_MEASURE
+    self.measures = []
 
-    num_measures.times { make_measure }
+    num_measures.times { |measure_num| add_measure(measure_num + 1) }
   end
 
   private
 
-  def make_measure
-    measure = []
-    beats_per_measure.times { measure << beat }
-    measures << measure
+  def add_measure(measure_num)
+    measures << Measure.new(
+                  number: measure_num,
+                  beats_per_measure: beats_per_measure,
+                  movement_vocabulary: movement_vocabulary,
+                  counts_per_beat: divisions
+                ).add_beats
   end
 
-  def beat
-    movement_vocabulary.movement_string
+  def divisions
+    @cpb ||= counts_per_beat || (1..4).to_a.sample
   end
 end
