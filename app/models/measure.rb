@@ -1,6 +1,6 @@
 class Measure
   include ActiveModel::Model
-  attr_accessor :number, :beats, :beats_per_measure, :movement_vocabulary, :counts_per_beat
+  attr_accessor :number, :movement_vocabulary, :counts_per_beat, :beats_per_measure, :beats
   # :next_measure
 
   # Once this is an ActiveRecord model, use the enum of Rails
@@ -18,11 +18,12 @@ class Measure
   def initialize(**args)
     super
     self.beats = []
+
+    add_beats
   end
 
   def add_beats
     beats_per_measure.times { |beat_num| add_beat(beat_num + 1) }
-    self
   end
 
   def add_beat(beat_num)

@@ -22,18 +22,20 @@ class Phrase
     self.beats_per_measure ||= DEFAULT_BEATS_PER_MEASURE
     self.measures = []
 
-    num_measures.times { |measure_num| add_measure(measure_num + 1) }
+    add_measures
   end
 
   private
 
-  def add_measure(measure_num)
-    measures << Measure.new(
-                  number: measure_num,
-                  beats_per_measure: beats_per_measure,
-                  movement_vocabulary: movement_vocabulary,
-                  counts_per_beat: divisions
-                ).add_beats
+  def add_measures
+    num_measures.times do |measure_num|
+      measures << Measure.new(
+                    number: measure_num + 1,
+                    beats_per_measure: beats_per_measure,
+                    movement_vocabulary: movement_vocabulary,
+                    counts_per_beat: divisions
+                  )
+    end
   end
 
   def divisions

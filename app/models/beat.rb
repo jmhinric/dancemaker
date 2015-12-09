@@ -1,9 +1,6 @@
 class Beat
   include ActiveModel::Model
-  attr_accessor :number, :movement_vocabulary, :movements, :counts_per_beat
-
-  # validates_inclusion_of :divisions, in: 1..4
-  # validates :divisions, presence: true
+  attr_accessor :number, :movement_vocabulary, :counts_per_beat, :movements
 
   TWO_COUNT = [nil, nil, '+']
   THREE_COUNT = [nil, nil, '+', 'a']
