@@ -31,9 +31,9 @@ class Phrase
     num_measures.times do |measure_num|
       measures << Measure.new(
                     number: measure_num + 1,
-                    beats_per_measure: beats_per_measure,
                     movement_vocabulary: movement_vocabulary,
-                    counts_per_beat: divisions
+                    counts_per_beat: divisions,
+                    beats_per_measure: beats_per_measure
                   )
     end
   end

@@ -18,11 +18,8 @@ class Beat
   def initialize(**args)
     super
     @movements = []
-  end
 
-  def add_counts
-    counts_per_beat.times { add_count }
-    self
+    add_counts
   end
 
   def label(count_number, measure_number)
@@ -34,6 +31,10 @@ class Beat
   end
 
   private
+
+  def add_counts
+    counts_per_beat.times { add_count }
+  end
 
   def add_count
     movements << movement_vocabulary.generate_movement

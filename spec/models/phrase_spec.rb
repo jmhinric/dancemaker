@@ -6,6 +6,7 @@ RSpec.describe Phrase do
   let(:num_measures) { 2 }
   let(:beats_per_measure) { (1..4).to_a.sample }
   let(:counts_per_beat) { (1..4).to_a.sample }
+
   let(:subject) do
     described_class.new(
       name: name,

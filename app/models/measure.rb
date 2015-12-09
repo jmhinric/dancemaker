@@ -22,15 +22,15 @@ class Measure
     add_beats
   end
 
-  def add_beats
-    beats_per_measure.times { |beat_num| add_beat(beat_num + 1) }
-  end
+  private
 
-  def add_beat(beat_num)
-    beats << Beat.new(
-               number: beat_num,
-               movement_vocabulary: movement_vocabulary,
-               counts_per_beat: counts_per_beat
-             ).add_counts
+  def add_beats
+    beats_per_measure.times do |beat_num|
+      beats << Beat.new(
+                 number: beat_num + 1,
+                 movement_vocabulary: movement_vocabulary,
+                 counts_per_beat: counts_per_beat
+               )
+    end
   end
 end

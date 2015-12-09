@@ -3,7 +3,8 @@ require "rails_helper"
 RSpec.describe Beat do
   let(:number) { Faker::Number.number(1).to_i }
   let(:movement_vocabulary) { build :movement_vocabulary }
-  let(:counts_per_beat) { Faker::Number.number(1).to_i }
+  let(:counts_per_beat) { (1..4).to_a.sample }
+
   let(:subject) do
     described_class.new(
       number: number,
@@ -13,27 +14,33 @@ RSpec.describe Beat do
   end
 
   describe "#initialize" do
+    let(:counts_per_beat) { 2 }
+    let(:movement1) { "movement1" }
+    let(:movement2) { "movement2" }
+
     it "sets its attributes" do
       expect(subject.number).to eq(number)
       expect(subject.movement_vocabulary).to eq(movement_vocabulary)
       expect(subject.counts_per_beat).to eq(counts_per_beat)
     end
-  end
 
-  describe "#add_counts" do
     it "sets the movements for each of the beat's counts" do
-      expect(movement_vocabulary).to receive(:generate_movement).exactly(counts_per_beat).times
-      subject.add_counts
-      expect(subject.movements.count).to eq(counts_per_beat)
+      expect(movement_vocabulary)
+        .to receive(:generate_movement)
+        .exactly(counts_per_beat)
+        .times
+        .and_return(movement1, movement2)
+      expect(subject.movements).to eq([movement1, movement2])
     end
   end
 
   describe "#label" do
-    let(:subject) { build :beat, number: number, counts_per_beat: 3 }
-    let(:result) { subject.label(count_number, measure_number) }
     let(:number) { 1 }
     let(:count_number) { 1 }
     let(:measure_number) { 1 }
+
+    let(:subject) { build :beat, number: number, counts_per_beat: 3 }
+    let(:result) { subject.label(count_number, measure_number) }
 
     context "first count of first beat" do
       context "of first measure" do
