@@ -1,7 +1,7 @@
 class Measure
   include ActiveModel::Model
   attr_accessor :number, :movement_vocabulary, :counts_per_beat, :beats_per_measure, :beats
-  # :next_measure
+  # Note: This class may eventually take a :next_measure attr_accessor
 
   # Once this is an ActiveRecord model, use the enum of Rails
   # enum type: [:simple, :complex]

@@ -33,11 +33,9 @@ class Beat
   private
 
   def add_counts
-    counts_per_beat.times { add_count }
-  end
-
-  def add_count
-    movements << movement_vocabulary.generate_movement
+    counts_per_beat.times do
+      movements << movement_vocabulary.generate_movement
+    end
   end
 
   def not_first_count_or_measure?(count_number)

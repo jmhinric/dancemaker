@@ -4,9 +4,9 @@
     <h3><%=phrase.name%></h3>
     <% phrase.measures.each do |measure| %>
         <div class="measure">
-          <% measure.beats.each_with_index do |beat, b_index| %>
-            <% beat.movements.each_with_index do |movement, c_index| %>
-              <li><%="#{beat.label(c_index+1, measure.number)}: #{movement}"%></li>
+          <% measure.beats.each do |beat| %>
+            <% beat.movements.each_with_index do |movement, index| %>
+              <li><%="#{beat.label(index+1, measure.number)}: #{movement}"%></li>
             <% end %>
           <% end %>
         </div>
