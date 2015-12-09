@@ -23,6 +23,10 @@ class MovementVocabulary
     set_movement_probabilities
   end
 
+  def generate_movement
+    pause? ? "" : movement_string
+  end
+
   def movement_string
     repeat = times_repeated
     movement + space(repeat) + repeat + " " + quality
@@ -33,6 +37,10 @@ class MovementVocabulary
   end
 
   private
+
+  def pause?
+    (0..100).to_a.sample < 25
+  end
 
   def times_repeated
     NUM_TIMES.sample
