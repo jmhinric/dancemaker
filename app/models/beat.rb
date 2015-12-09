@@ -7,7 +7,7 @@ class Beat
 
   TWO_COUNT = [nil, nil, '+']
   THREE_COUNT = [nil, nil, '+', 'a']
-  FOUR_COUNT = [nil, nil, 'e', '+', 'u']
+  FOUR_COUNT = [nil, nil, 'e', '+', 'a']
 
   COUNT_LABEL = [nil, [], TWO_COUNT, THREE_COUNT, FOUR_COUNT]
 
@@ -28,27 +28,25 @@ class Beat
     self
   end
 
-  def add_count
-    movements << movement
-  end
-
   def label(count_number, measure_number)
-    return sublabel(count_number) if number != 1 || count_number != 1
-    number == 1 ? measure_number : number
+    if not_first_count_or_measure?(count_number)
+      sublabel(count_number) || number 
+    else
+      measure_number
+    end
   end
 
   private
 
+  def add_count
+    movements << movement_vocabulary.generate_movement
+  end
+
+  def not_first_count_or_measure?(count_number)
+    number != 1 || count_number != 1
+  end
+
   def sublabel(count_number)
-    COUNT_LABEL[counts_per_beat][count_number] || number
-  end
-
-  def movement
-    return "" if should_pause?
-    movement_vocabulary.movement_string
-  end
-
-  def should_pause?
-    (0..100).to_a.sample < 25
+    COUNT_LABEL[counts_per_beat][count_number]
   end
 end

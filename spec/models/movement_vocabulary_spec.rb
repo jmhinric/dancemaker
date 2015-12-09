@@ -17,18 +17,29 @@ RSpec.describe MovementVocabulary do
     end
 
     it "raises an exception if movement weights don't total 100" do
-      movement1.weight = 25
-      movement2.weight = 55
+      movement1.weight = 55
       expect { vocab }.to raise_error
     end
   end
 
-  describe "#movement" do
-    let(:names) { movements.map(&:name) }
-    let(:result) { vocab.movement }
+  describe "#generate_movement" do
+    let(:result) { subject.generate_movement }
 
-    it "returns the name of a randomly selected movement" do
-      expect(names.include? result).to be(true)
+    context "pause true" do
+      before { allow(subject).to receive(:pause?) { true } }
+
+      it "gives an empty string" do
+        expect(result).to eq("")
+      end
+    end
+
+    context "pause false" do
+      before { allow(subject).to receive(:pause?) { false } }
+
+      it "gives a movement string" do
+        expect(subject).to receive(:movement_string)
+        result
+      end
     end
   end
 
@@ -55,6 +66,15 @@ RSpec.describe MovementVocabulary do
       it "returns a movement name, times to repeat, and quality" do
         expect(vocab.movement_string).to eq("tendu quickly")
       end
+    end
+  end
+
+  describe "#movement" do
+    let(:names) { movements.map(&:name) }
+    let(:result) { vocab.movement }
+
+    it "returns the name of a randomly selected movement" do
+      expect(names.include? result).to be(true)
     end
   end
 end
